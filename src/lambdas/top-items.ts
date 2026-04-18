@@ -14,8 +14,8 @@ const main = async () => {
 
   return response.ok({
     body: {
-      topArtists,
-      topTracks,
+      artists: topArtists.items,
+      tracks: topTracks.items,
     },
   });
 };
