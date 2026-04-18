@@ -1,0 +1,26 @@
+{
+  "name": "spotify",
+  "version": "0.1.0",
+  "description": "API for my spotify to power my website",
+  "author": "Tom Hewitt",
+  "scripts": {
+    "build": "rm -rf dist && tsc -b && cp package.json dist/package.json && cd dist && npm i --omit=dev",
+    "deploy": "sls deploy --aws-profile tom",
+    "lint-fix": "retail-linter --sourceFolder=./ --type=typescript --fix",
+    "prepare": "husky",
+    "release": "ts-node --esm release.ts && npm run build && npm run deploy"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "20.5.0",
+    "@commitlint/config-conventional": "20.5.0",
+    "@types/aws-lambda": "8.10.122",
+    "@types/node": "25.2.3",
+    "aws-lambda": "1.0.7",
+    "date-fns": "4.1.0",
+    "husky": "9.1.7",
+    "retail-linter": "3.4.0",
+    "serverless": "3.4",
+    "ts-node": "10.9.2",
+    "typescript": "5.9.3"
+  }
+}

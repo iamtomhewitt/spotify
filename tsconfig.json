@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": [
+      "node"
+    ],
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "resolveJsonModule": true,
+    "rootDir": "./",
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "esnext",
+    "typeRoots": [
+      "./node_modules/@types",
+      "../../node_modules/@types",
+    ],
+  },
+  "exclude": [
+    ".idea",
+    "**/build",
+    "**/.build",
+    "**/node_modules**",
+    "**/coverage",
+    "**/bin",
+    "**/dist",
+    "**/jest",
+    "**/jest.*",
+    "**/babel.*",
+    "**/*.spec.ts"
+  ]
+}

@@ -1,2 +1,3 @@
-# spotify
-API for my spotify to power my website
+# Spotify
+
+API for my Spotify to power my [website](https://iamtomhewitt.github.io/website).
