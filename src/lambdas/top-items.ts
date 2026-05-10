@@ -1,5 +1,6 @@
-import { BadRequestError, withErrorHandling } from '../lib/error';
-import { response } from '../lib/response';
+import { BadRequestError, withErrorHandling } from '@iamtomhewitt/error';
+import { http } from '@iamtomhewitt/http';
+
 import { spotify } from '../lib/spotify';
 
 const main = async () => {
@@ -12,7 +13,7 @@ const main = async () => {
   const topArtists = await spotify.request('/me/top/artists');
   const topTracks = await spotify.request('/me/top/tracks');
 
-  return response.ok({
+  return http.response.ok({
     body: {
       artists: topArtists.items,
       tracks: topTracks.items,
@@ -20,4 +21,9 @@ const main = async () => {
   });
 };
 
-export const handler = withErrorHandling(main);
+export const handler = withErrorHandling(
+  main,
+  (err, code) => http.response.json(code, {
+    message: `${err.name}: ${err.message}`,
+  }),
+);
