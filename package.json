@@ -11,14 +11,14 @@
     "release": "iamtomhewitt-releaser && npm run build && npm run deploy"
   },
   "dependencies": {
-    "@iamtomhewitt/error": "3.1.0",
-    "@iamtomhewitt/http": "3.1.0"
+    "@iamtomhewitt/error": "3.1.2",
+    "@iamtomhewitt/http": "3.1.2"
   },
   "devDependencies": {
     "@commitlint/cli": "20.5.0",
     "@commitlint/config-conventional": "20.5.0",
-    "@iamtomhewitt/linter": "3.1.0",
-    "@iamtomhewitt/releaser": "3.1.0",
+    "@iamtomhewitt/linter": "3.1.2",
+    "@iamtomhewitt/releaser": "3.1.2",
     "@types/node": "25.2.3",
     "husky": "9.1.7",
     "serverless": "3.4",
