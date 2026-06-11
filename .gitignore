@@ -1,8 +1,10 @@
 *.env
+*.jpg
 *.local
 *.log
 *.njsproj
 *.ntvs*
+*.png
 *.sln
 *.suo
 *.sw?
@@ -20,5 +22,3 @@ output.png
 pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.png
-.jpg

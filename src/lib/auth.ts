@@ -1,3 +1,5 @@
+import { SpotifyToken } from '../types/spotify';
+
 const isMissingTokens = () => {
   const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REFRESH_TOKEN } = process.env;
 
@@ -8,7 +10,7 @@ const isMissingTokens = () => {
   return false;
 };
 
-const getTokenAuth = async () => {
+const getTokenAuth = async (): Promise<SpotifyToken> => {
   const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REFRESH_TOKEN } = process.env;
 
   const response = await fetch('https://accounts.spotify.com/api/token', {
@@ -23,12 +25,12 @@ const getTokenAuth = async () => {
     method: 'POST',
   });
 
-  return await response.json();
+  return await response.json() as SpotifyToken;
 };
 
 const getAccessToken = async () => {
-  const response = await getTokenAuth() as any;
-  return response.access_token as string;
+  const response = await getTokenAuth();
+  return response.access_token;
 };
 
 export const auth = {
