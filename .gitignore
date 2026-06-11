@@ -16,6 +16,9 @@ lerna-debug.log*
 logs
 node_modules
 npm-debug.log*
+output.png
 pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.png
+.jpg

@@ -1,3 +1,13 @@
+const isMissingTokens = () => {
+  const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REFRESH_TOKEN } = process.env;
+
+  if (!SPOTIFY_CLIENT_ID || !SPOTIFY_CLIENT_SECRET || !SPOTIFY_REFRESH_TOKEN) {
+    return true;
+  }
+
+  return false;
+};
+
 const getTokenAuth = async () => {
   const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REFRESH_TOKEN } = process.env;
 
@@ -17,10 +27,11 @@ const getTokenAuth = async () => {
 };
 
 const getAccessToken = async () => {
-  const response = await getTokenAuth();
+  const response = await getTokenAuth() as any;
   return response.access_token as string;
 };
 
 export const auth = {
   getAccessToken,
+  isMissingTokens,
 };
