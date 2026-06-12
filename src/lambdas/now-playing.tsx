@@ -35,7 +35,7 @@ const main = async () => {
       return defaultColours;
     }
 
-    const filePath = path.join(__dirname, 'album-art.jpg');
+    const filePath = path.join(process.env.LOCAL ? __dirname : '/tmp', 'album-art.jpg');
     const stream = fs.createWriteStream(filePath);
     const { body } = await fetch(nowPlaying?.item.album.images[0].url);
 

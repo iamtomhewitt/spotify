@@ -9,6 +9,9 @@ provider:
   runtime: nodejs24.x
   stage: api
   timeout: 30
+  apiGateway:
+    binaryMediaTypes:
+      - "*/*"
   environment:
     SPOTIFY_CLIENT_ID: ${env:SPOTIFY_CLIENT_ID}
     SPOTIFY_CLIENT_SECRET: ${env:SPOTIFY_CLIENT_SECRET}
@@ -28,9 +31,23 @@ functions:
           cors: true
           method: get
           path: /top-items
-    handler: dist/src/lambdas/top-items.handler
+    handler: dist/lambdas/top-items.handler
     logRetentionInDays: 7
     name: spotify-top-items
+    role:
+      Fn::GetAtt:
+        - LambdaRole
+        - Arn
+  nowPlayingBadge:
+    description: Get an image of what I am currently listening to
+    events:
+      - http:
+          cors: true
+          method: get
+          path: /now-playing-badge
+    handler: dist/lambdas/now-playing.handler
+    logRetentionInDays: 7
+    name: spotify-now-playing-badge
     role:
       Fn::GetAtt:
         - LambdaRole
