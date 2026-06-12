@@ -53,7 +53,9 @@ const NowPlayingBadge = ({ lightColour, darkColour, nowPlaying }: Props) => {
         <div>{item.name}</div>
         <div style={{
           opacity: '0.7',
-        }}>{item.artists[0].name}</div>
+        }}>
+          {item.artists[0].name}
+        </div>
       </div>
     </div >
   );

@@ -6,7 +6,6 @@ import { BadRequestError, withErrorHandling } from '@iamtomhewitt/error';
 import { ImageResponseOptions } from '@vercel/og';
 import { Readable } from 'stream';
 import { finished } from 'stream/promises';
-import { http } from '@iamtomhewitt/http';
 
 import NowPlayingBadge from '../components/now-playing-badge';
 import { SpotifyNowPlaying } from '../types/spotify';
@@ -22,9 +21,6 @@ const main = async () => {
 
   const nowPlaying = await spotify.request<SpotifyNowPlaying | undefined>('/me/player/currently-playing');
 
-  // https://i.etsystatic.com/47428223/r/il/69225c/7698559727/il_fullxfull.7698559727_31go.jpg
-  // style like this left badge
-
   const { ImageResponse } = await import('@vercel/og');
 
   const imageOptions: ImageResponseOptions = {
@@ -32,13 +28,15 @@ const main = async () => {
     width: nowPlaying ? nowPlaying.item.album.images[0].width : 100,
   };
 
-  const { light, dark, colour } = await (async () => {
+  const { light, dark } = await (async () => {
+    const defaultColours = {
+      colour: '#fff',
+      dark: '#000',
+      light: '#fff',
+    };
+
     if (!nowPlaying) {
-      return {
-        colour: '#fff',
-        dark: '#000',
-        light: '#fff',
-      };
+      return defaultColours;
     }
 
     const filePath = path.join(__dirname, 'album-art.jpg');
@@ -46,11 +44,7 @@ const main = async () => {
     const { body } = await fetch(nowPlaying?.item.album.images[0].url);
 
     if (!body) {
-      return {
-        colour: '#fff',
-        dark: '#000',
-        light: '#fff',
-      };
+      return defaultColours;
     }
 
     await finished(Readable.fromWeb(body).pipe(stream));
@@ -86,7 +80,7 @@ const main = async () => {
 export const handler = withErrorHandling(
   main,
   (err, code) => {
-    console.log('TODO return image saying error');
+    console.log('TODO return image saying error', err, code);
   },
 );
 
