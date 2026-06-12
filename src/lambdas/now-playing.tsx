@@ -10,6 +10,7 @@ import { finished } from 'stream/promises';
 import NowPlayingBadge from '../components/now-playing-badge';
 import { SpotifyNowPlaying } from '../types/spotify';
 import { auth } from '../lib/auth';
+import { font } from '../lib/font';
 import { spotify } from '../lib/spotify';
 
 dotenv.config();
@@ -22,11 +23,6 @@ const main = async () => {
   const nowPlaying = await spotify.request<SpotifyNowPlaying | undefined>('/me/player/currently-playing');
 
   const { ImageResponse } = await import('@vercel/og');
-
-  const imageOptions: ImageResponseOptions = {
-    height: nowPlaying ? nowPlaying.item.album.images[0].height : 100,
-    width: nowPlaying ? nowPlaying.item.album.images[0].width : 100,
-  };
 
   const { light, dark } = await (async () => {
     const defaultColours = {
@@ -60,8 +56,25 @@ const main = async () => {
     };
   })();
 
-  const res = new ImageResponse(<NowPlayingBadge lightColour={light} darkColour={dark} nowPlaying={nowPlaying} />, imageOptions);
-  const arrayBuffer = await res.arrayBuffer();
+  const imageOptions: ImageResponseOptions = {
+    fonts: [{
+      data: await font.loadGoogleFont('Outfit'),
+      name: 'iamtomhewitt-font',
+      style: 'normal',
+    }],
+    height: nowPlaying ? nowPlaying.item.album.images[0].height : 100,
+    width: nowPlaying ? nowPlaying.item.album.images[0].width : 100,
+  };
+
+  const generatedImage = new ImageResponse(
+    <NowPlayingBadge
+      lightColour={light}
+      darkColour={dark}
+      nowPlaying={nowPlaying}
+    />,
+    imageOptions,
+  );
+  const arrayBuffer = await generatedImage.arrayBuffer();
 
   if (process.env.USER && process.env.USER === 'thewitt') {
     fs.writeFileSync('output.png', Buffer.from(arrayBuffer)); // For local testing

@@ -45,6 +45,7 @@ const NowPlayingBadge = ({ lightColour, darkColour, nowPlaying }: Props) => {
         color: '#fff',
         display: 'flex',
         flexDirection: 'column',
+        fontFamily: 'iamtomhewitt-font',
         fontSize: '3rem',
         height: '23%',
         position: 'absolute',
