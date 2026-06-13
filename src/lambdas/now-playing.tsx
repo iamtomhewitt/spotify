@@ -96,7 +96,3 @@ export const handler = withErrorHandling(
     console.log('TODO return image saying error', err, code);
   },
 );
-
-(async () => {
-  main();
-})();

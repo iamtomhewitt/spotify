@@ -30,8 +30,3 @@ export const handler = withErrorHandling(
     message: `${err.name}: ${err.message}`,
   }),
 );
-
-(async () => {
-  main()
-    .then(x => console.log(JSON.parse(x.body)));
-})();
