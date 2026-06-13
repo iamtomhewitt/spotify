@@ -83,6 +83,7 @@ const main = async () => {
   return {
     body: Buffer.from(arrayBuffer).toString('base64'),
     headers: {
+      'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
       'Content-Type': 'image/png',
     },
     isBase64Encoded: true,
