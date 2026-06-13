@@ -1,6 +1,6 @@
 {
   "name": "spotify",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "API for my spotify to power my website",
   "author": "Tom Hewitt",
   "scripts": {
