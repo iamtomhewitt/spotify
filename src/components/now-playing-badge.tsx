@@ -1,22 +1,38 @@
+import BadgeText from './badge-text';
+import RoundedSquare from './rounded-square';
+import SpotifyLogo from './spotify-logo';
 import { SpotifyNowPlaying } from '../types/spotify';
 
 const NowPlayingBadge = ({ lightColour, darkColour, nowPlaying }: Props) => {
   if (!nowPlaying) {
-    return <div>TODO not playing anything</div>;
+    return (
+      <RoundedSquare darkColour='#12b44a' lightColour='#1ED760'>
+
+        <SpotifyLogo />
+
+        <BadgeText>
+          <div>Nothing playing</div>
+          <div style={{
+            fontSize: '2.6rem',
+            opacity: '0.7',
+          }}>
+            My headphones are off for now
+          </div>
+        </BadgeText>
+      </RoundedSquare>
+    );
   }
 
   const { item } = nowPlaying;
   const image = item.album.images[0];
 
   return (
-    <div style={{
-      background: `linear-gradient(225deg, ${lightColour}, ${darkColour})`,
-      borderRadius: '50px',
-      display: 'flex',
-      height: `${image.height}px`,
-      padding: '4%',
-      width: `${image.width}px`,
-    }}>
+    <RoundedSquare
+      darkColour={darkColour}
+      lightColour={lightColour}
+      width={image.width}
+      height={image.height}
+    >
       <div style={{
         backgroundImage: `url(${image.url})`,
         backgroundSize: 'contain',
@@ -28,37 +44,29 @@ const NowPlayingBadge = ({ lightColour, darkColour, nowPlaying }: Props) => {
         width: `${image.width * 0.7}px`,
       }} />
 
-      <img
-        src='https://storage.googleapis.com/pr-newsroom-wp/1/2023/05/Spotify_Primary_Logo_RGB_White.png'
-        style={{
-          height: `${image.height * 0.15}px`,
-          position: 'absolute',
-          right: '4%',
-          top: '4%',
-          width: `${image.width * 0.15}px`,
-        }}
-      />
+      <SpotifyLogo width={image.width} height={image.height} />
 
-      <div style={{
-        borderRadius: '0 0 50px 50px',
-        bottom: '0',
-        color: '#fff',
-        display: 'flex',
-        flexDirection: 'column',
-        fontFamily: 'iamtomhewitt-font',
-        fontSize: '3rem',
-        height: '23%',
-        position: 'absolute',
-        textAlign: 'left',
-      }}>
-        <div>{item.name}</div>
+      <BadgeText>
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          fontSize: '1.75rem',
+        }}>
+          <span>Now playing:</span>
+          <br />
+          <span style={{
+            fontSize: '3rem',
+          }}>
+            {item.name}
+          </span>
+        </div>
         <div style={{
           opacity: '0.7',
         }}>
           {item.artists[0].name}
         </div>
-      </div>
-    </div >
+      </BadgeText>
+    </RoundedSquare>
   );
 };
 

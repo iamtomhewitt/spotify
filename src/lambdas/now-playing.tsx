@@ -62,8 +62,8 @@ const main = async () => {
       name: 'iamtomhewitt-font',
       style: 'normal',
     }],
-    height: nowPlaying ? nowPlaying.item.album.images[0].height : 100,
-    width: nowPlaying ? nowPlaying.item.album.images[0].width : 100,
+    height: nowPlaying ? nowPlaying.item.album.images[0].height : 640,
+    width: nowPlaying ? nowPlaying.item.album.images[0].width : 640,
   };
 
   const generatedImage = new ImageResponse(
