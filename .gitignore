@@ -1,8 +1,10 @@
 *.env
+*.jpg
 *.local
 *.log
 *.njsproj
 *.ntvs*
+*.png
 *.sln
 *.suo
 *.sw?
@@ -16,6 +18,8 @@ lerna-debug.log*
 logs
 node_modules
 npm-debug.log*
+output.png
 pnpm-debug.log*
+tsconfig.tsbuildinfo
 yarn-debug.log*
 yarn-error.log*
