@@ -1,3 +1,7 @@
+## Version 2.0.1
+Released **13th Jun 2026 03:54:53pm** - *1 commits*
+- ad6e0f2 fix: caching headers
+
 ## Version 2.0.0
 Released **13th Jun 2026 03:12:54pm** - *4 commits*
 - 0efb8cf feat: add now playing badge
@@ -14,4 +18,4 @@ Released **18 Apr 2026 21:17:00pm** - *2 commits*
 - 9a7343e chore: update lib files
 - 3afb81f chore: add changelog
 
-   
+    
